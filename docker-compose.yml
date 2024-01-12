@@ -1,0 +1,21 @@
+services:
+  webui:
+    image: nginx:latest
+    ports:
+      - 8080:80
+  api:
+    image: eh-notes-app-api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTRES_USER: postgres
+      POSTGRES_PASSWORD: supersecure
+    ports:
+      - 5432:5432
