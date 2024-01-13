@@ -22,16 +22,38 @@ class NotesDao:
             results = cur.fetchall()
         return results
 
-    def create_note(self, name, body):
+    def get_note_by_id(self, note_id):
+        with self._get_cursor() as cur:
+            cur.execute("select * from notes where note_id = %s", (note_id,))
+            result = cur.fetchone()
+        return result
+
+    def create_note(self, name):
+        result = None
         with self._get_cursor() as cur:
             cur.execute(
                 """
-                insert into notes (name, body)
-                values (%s, %s);
+                insert into notes (name)
+                values (%s)
+                returning notes.note_id;
+                """,
+                (name,),
+            )
+            result = cur.fetchone()
+        self._conn.commit()
+        return result
+
+    def update_note(self, note_id, name, body):
+        with self._get_cursor() as cur:
+            cur.execute(
+                """
+                update notes set name = %s, body = %s
+                where note_id = %s;
                 """,
                 (
                     name,
                     body,
+                    note_id,
                 ),
             )
         self._conn.commit()

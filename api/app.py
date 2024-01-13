@@ -17,7 +17,7 @@ notes_dao = NotesDao(pg_conn)
 @app.route("/notes", methods=["GET"])
 def list_all_notes():
     result = notes_dao.get_notes()
-    return jsonify(result)
+    return jsonify(result), 200
 
 
 @app.route("/notes", methods=["POST"])
@@ -28,12 +28,30 @@ def create_note():
     if not name:
         return jsonify("missing name in request body"), 400
 
+    result = notes_dao.create_note(name)
+    return jsonify(result), 200
+
+
+@app.route("/notes/<int:note_id>", methods=["PATCH"])
+def update_note(note_id):
+    req = request.json
+
+    name = req.get("name", None)
+    if not name:
+        return jsonify("missing name in request body"), 400
+
     body = req.get("body", None)
     if not body:
         return jsonify("missing body in request body"), 400
 
-    notes_dao.create_note(name, body)
+    notes_dao.update_note(note_id, name, body)
     return jsonify(), 204
+
+
+@app.route("/notes/<int:note_id>", methods=["GET"])
+def get_note_by_id(note_id):
+    result = notes_dao.get_note_by_id(note_id)
+    return jsonify(result), 200
 
 
 if __name__ == "__main__":

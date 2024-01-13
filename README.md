@@ -6,5 +6,4 @@ This app was designed as a take-home test for a position with Open Energy Soluti
 
 Ensure that you have Docker and Docker Compose installed on your machine.
 
-In the root of this repository: `docker compose up -d` will start all services on their default ports
-
+In the root of this repository: `docker compose up -d --build` will start all services on their default ports
