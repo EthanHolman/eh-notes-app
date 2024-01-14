@@ -2,10 +2,14 @@
   <div class="about">
     <h1>About</h1>
     <p>
-      This is a simple note app written by Ethan Holman. I am quite certain there are no other
-      similar projects on GitHub (he says sarcastically).
+      This is a simple note app written by Ethan Holman. It's for a take-home coding exercise for
+      Open Energy Solutions.
     </p>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.about {
+  padding: 1rem;
+}
+</style>

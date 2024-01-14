@@ -1,5 +1,10 @@
-export type Note = {
+export type NoteSummary = {
+  note_id: number;
   name: string;
-  createdDt: Date;
-  modifiedDt: Date;
+  created_dt: Date;
+  modified_dt: Date;
+};
+
+export type Note = NoteSummary & {
+  body: string;
 };
