@@ -36,15 +36,11 @@ def create_note():
 def update_note(note_id):
     req = request.json
 
-    name = req.get("name", None)
-    if not name:
-        return jsonify("missing name in request body"), 400
-
     body = req.get("body", None)
     if not body:
         return jsonify("missing body in request body"), 400
 
-    notes_dao.update_note(note_id, name, body)
+    notes_dao.update_note(note_id, body)
     return jsonify(), 204
 
 

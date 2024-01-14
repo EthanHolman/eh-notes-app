@@ -16,7 +16,8 @@ class NotesDao:
             cur.execute(
                 """
                 select note_id, name, created_dt, modified_dt
-                from notes;
+                from notes
+                order by note_id desc;
                 """
             )
             results = cur.fetchall()
@@ -43,15 +44,14 @@ class NotesDao:
         self._conn.commit()
         return result
 
-    def update_note(self, note_id, name, body):
+    def update_note(self, note_id, body):
         with self._get_cursor() as cur:
             cur.execute(
                 """
-                update notes set name = %s, body = %s
+                update notes set body = %s
                 where note_id = %s;
                 """,
                 (
-                    name,
                     body,
                     note_id,
                 ),
