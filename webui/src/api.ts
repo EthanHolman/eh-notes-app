@@ -6,7 +6,7 @@ export function listAllNotes(): Promise<NoteSummary[]> {
   return axios.get(`${API_BASE_URL}/notes`).then((x) => x.data);
 }
 
-export function createNewNote(name: string) {
+export function createNewNote(name: string): Promise<Note> {
   return axios.post(`${API_BASE_URL}/notes`, { name }).then((x) => x.data);
 }
 

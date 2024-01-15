@@ -16,6 +16,7 @@ import CreateNote from './CreateNote.vue';
   overflow: auto;
   padding: 1rem;
   background-color: #eee;
+  max-width: 400px;
 
   & > * {
     margin-bottom: 1rem;

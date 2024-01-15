@@ -36,7 +36,7 @@ class NotesDao:
                 """
                 insert into notes (name)
                 values (%s)
-                returning notes.note_id;
+                returning notes.*;
                 """,
                 (name,),
             )

@@ -23,3 +23,7 @@ p {
   margin: 0;
   padding: 0;
 }
+
+.p-b1 {
+  padding-bottom: 1rem;
+}

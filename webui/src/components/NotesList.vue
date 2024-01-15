@@ -1,8 +1,8 @@
 <template>
   <div class="notes-list-container">
-    <h2>Your Notes</h2>
+    <h2 class="p-b1">Your Notes</h2>
     <div v-if="loading">Loading your notes, one moment please...</div>
-    <div v-if="error">
+    <div v-if="isError">
       There was an error loading your notes. Check browser console for more details.
     </div>
     <div v-if="loaded" class="note-list-container">
@@ -12,6 +12,7 @@
         </router-link>
         <p>Modified {{ note.modified_dt }}</p>
       </div>
+      <div v-if="noteStore.allNotes && !loading">You don't have any notes yet.</div>
     </div>
   </div>
 </template>
@@ -23,7 +24,7 @@ import { onMounted, ref } from 'vue';
 
 const loaded = ref(false);
 const loading = ref(false);
-const error = ref(false);
+const isError = ref(false);
 const noteStore = useNoteStore();
 
 onMounted(() => {
@@ -35,7 +36,7 @@ onMounted(() => {
     })
     .catch((error) => {
       console.error(error);
-      error.value = true;
+      isError.value = true;
     })
     .finally(() => (loading.value = false));
 });

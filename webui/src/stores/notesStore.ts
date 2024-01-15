@@ -1,4 +1,4 @@
-import type { NoteSummary } from '@/types';
+import type { Note, NoteSummary } from '@/types';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
@@ -18,5 +18,10 @@ export const useNoteStore = defineStore('notes', () => {
     currentNoteId.value = noteId;
   }
 
-  return { allNotes, setAllNotes, setCurrentNote, currentNoteData, currentNoteId };
+  function addNote({ body, ...note }: Note) {
+    allNotes.value.splice(0, 0, note);
+    currentNoteId.value = note.note_id;
+  }
+
+  return { allNotes, setAllNotes, setCurrentNote, currentNoteData, currentNoteId, addNote };
 });
