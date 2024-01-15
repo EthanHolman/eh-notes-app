@@ -7,3 +7,7 @@ This app was designed as a take-home test for a position with Open Energy Soluti
 Ensure that you have Docker and Docker Compose installed on your machine.
 
 In the root of this repository: `docker compose up -d --build` will start all services on their default ports
+
+Shortcomings:
+
+- UI isn't part of docker compose build yet. You'll need to start API with docker compose, then follow instructions in UI project to start dev server locally.
